@@ -1,430 +1,215 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Panduan Buku Kas — GitHub Pages</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:system-ui,sans-serif;background:#f1f5ef;color:#243c32;margin:0;line-height:1.8}main{max-width:960px;margin:30px auto;background:white;padding:50px;border-radius:18px}h1{font-size:38px;line-height:1.2;letter-spacing:-1.4px;color:#12533d}h2{font-size:25px;line-height:1.4;border-top:1px solid #dce5dc;margin-top:48px;padding-top:28px;scroll-margin-top:20px}a{color:#12684b}p,li{font-size:15px}li{margin:8px 0}pre{padding:18px;background:#edf3ec;white-space:pre-wrap;overflow-wrap:anywhere;border-radius:10px;font-size:13px}code{font-size:.9em;overflow-wrap:anywhere}table{display:block;overflow:auto;border-collapse:collapse;width:100%;margin:24px 0;font-size:14px}td,th{padding:12px;border:1px solid #dfe7df;vertical-align:top;text-align:left}th{background:#edf3eb}nav{padding:20px 28px;background:#f0f5ec;border-radius:12px;margin:25px 0}nav ol{columns:2;padding:0;list-style:none}nav a{text-decoration:none}nav li{font-size:13px;break-inside:avoid}.top{font-size:12px;color:#648271;letter-spacing:2px}button{padding:10px 16px;color:white;background:#145a42;border:0;border-radius:8px;cursor:pointer}footer{margin-top:35px;color:#788c7e;font-size:12px}@media(max-width:700px){main{margin:0;padding:24px;border-radius:0}h1{font-size:30px}h2{font-size:22px}nav ol{columns:1}}@media print{body{background:white}main{margin:0;max-width:none;padding:0}button,nav{display:none}h2{break-after:avoid}pre,table{break-inside:avoid}a{color:inherit;text-decoration:none}}</style></head><body><main><div class="top">BUKU KAS BERSAMA · GITHUB PAGES</div><p><button onclick="window.print()">Cetak / Simpan sebagai PDF</button> <a href="index.html">Buka aplikasi</a></p><nav><strong>Daftar isi</strong><ol><li><a href="#bagian-1">1. Hasil yang akan Anda dapatkan</a></li><li><a href="#bagian-2">2. Pahami tempat penyimpanan dan izin</a></li><li><a href="#bagian-3">3. Siapkan bahan sebelum mulai</a></li><li><a href="#bagian-4">4. Buat spreadsheet milik akun yang benar</a></li><li><a href="#bagian-5">5. Buat repository GitHub dan unggah file</a></li><li><a href="#bagian-6">6. Aktifkan GitHub Pages</a></li><li><a href="#bagian-7">7. Buat project Google Cloud</a></li><li><a href="#bagian-8">8. Aktifkan Google Sheets API</a></li><li><a href="#bagian-9">9. Buka Google Auth Platform dan atur aplikasi</a></li><li><a href="#bagian-10">10. Buat OAuth Client ID untuk alamat GitHub</a></li><li><a href="#bagian-11">11. Isi config.js melalui GitHub</a></li><li><a href="#bagian-12">12. Login pertama dan siapkan tab data</a></li><li><a href="#bagian-13">13. Tambahkan anggota dengan Gmail lain</a></li><li><a href="#bagian-14">14. Pemakaian sehari-hari</a></li><li><a href="#bagian-15">15. Jika internet atau Google sedang bermasalah</a></li><li><a href="#bagian-16">16. Mengapa spreadsheet berisi riwayat, bukan hanya satu baris per transaksi?</a></li><li><a href="#bagian-17">17. Penyelesaian masalah</a></li><li><a href="#bagian-18">18. Daftar pemeriksaan akhir</a></li><li><a href="#bagian-19">19. Batas versi ini dan pengembangan berikutnya</a></li><li><a href="#bagian-20">20. Rujukan resmi</a></li></ol></nav><h1>Buku Kas Bersama — panduan dari nol</h1>
-<p><strong>Pemilik yang digunakan: <a href="mailto:prasojob10@gmail.com">prasojob10@gmail.com</a></strong><br>Versi: GitHub Pages + Google Sheets API · 3 Oktober 2026</p>
-<p>Paket ini berisi website HTML, CSS, dan JavaScript yang dapat diunggah langsung ke GitHub. Tidak perlu menjalankan npm, membeli domain, atau menyewa server. Anda tetap perlu melakukan pengaturan Google dan GitHub sekali agar login serta penyimpanan dapat bekerja.</p>
-<p><strong>Status paket:</strong> kode siap dikonfigurasi. Situs belum diterbitkan ke akun GitHub Anda. Dua nilai di <code>config.js</code> masih kosong karena Client ID Google yang baru dan ID spreadsheet Anda belum diberikan. Pengujian lokal menggunakan simulasi layanan Google; keberhasilan login pada akun nyata harus diperiksa setelah langkah pemasangan selesai.</p>
-<h2 id="bagian-1">1. Hasil yang akan Anda dapatkan</h2>
-<ul>
-<li>Website responsif untuk HP, tablet, dan komputer.</li>
-<li>Masuk memakai akun Google; anggota tidak membutuhkan akun ChatGPT ataupun akun GitHub untuk menggunakan website.</li>
-<li>Tambah, edit, dan hapus pemasukan/pengeluaran dengan tanggal, nominal rupiah, kategori, serta catatan.</li>
-<li>Laporan bulanan: saldo awal, pemasukan, pengeluaran, saldo akhir.</li>
-<li>Pencarian, filter jenis, dan unduhan CSV sesuai filter aktif.</li>
-<li>Data bersama disimpan pada spreadsheet milik <code>prasojob10@gmail.com</code>.</li>
-<li>Antrean di browser jika penyimpanan ke Google gagal. Antrean dikirim saat Anda menekan <strong>Perbarui &amp; kirim antrean</strong>.</li>
-<li>Pemeriksaan benturan perubahan apabila anggota mengedit transaksi yang sama.</li>
-</ul>
-<p>Alamat akhirnya berbentuk <strong><a href="https://USERNAME.github.io/buku-kas/">https://USERNAME.github.io/buku-kas/</a></strong>. <code>USERNAME</code> adalah nama pengguna GitHub Anda; bukan alamat Gmail dan belum tentu <code>prasojob10</code>. Semua contoh USERNAME dalam panduan harus diganti dengan nama yang benar.</p>
-<p>GitHub Pages tersedia untuk repositori publik di paket GitHub Free. Pemakaian standar Sheets API saat panduan ini dibuat tidak dikenakan biaya tambahan dalam kuota standar. Kebijakan layanan dapat berubah; dokumentasi Google menyebut rencana biaya untuk penggunaan yang melampaui kuota pada 2026. Paket ini tidak membutuhkan layanan Cloud berbayar atau peningkatan kuota. Akses tetap bergantung pada internet, ketersediaan GitHub/Google, dan kuota layanan; bukan jaminan aktif tanpa gangguan.</p>
-<h2 id="bagian-2">2. Pahami tempat penyimpanan dan izin</h2>
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Panduan Pembaruan Buku Kas v2</title><style>*{box-sizing:border-box}body{font-family:system-ui,sans-serif;background:#f1f5ef;color:#243c32;margin:0;line-height:1.8}main{max-width:960px;margin:30px auto;background:white;padding:45px;border-radius:18px}h1{font-size:34px;line-height:1.3;color:#12533d}h2{font-size:24px;border-top:1px solid #dce5dc;margin-top:40px;padding-top:25px}a{color:#12684b}p,li{font-size:15px}li{margin:8px 0}pre{padding:18px;background:#edf3ec;white-space:pre-wrap;border-radius:10px;font-size:13px}code{overflow-wrap:anywhere}table{display:block;overflow:auto;border-collapse:collapse;width:100%;margin:24px 0;font-size:14px}td,th{padding:12px;border:1px solid #dfe7df;vertical-align:top;text-align:left}th,nav{background:#edf3eb}nav{padding:20px;border-radius:12px}nav ol{columns:2;list-style:none;padding:0}nav li{font-size:13px;break-inside:avoid}button{padding:10px 16px;color:white;background:#145a42;border:0;border-radius:8px;cursor:pointer}@media(max-width:700px){main{margin:0;padding:24px;border-radius:0}h1{font-size:28px}nav ol{columns:1}}@media print{body{background:white}main{margin:0;max-width:none;padding:0}button,nav{display:none}h2{break-after:avoid}}</style></head><body><main><p><button onclick="window.print()">Cetak / Simpan PDF</button> <a href="index.html">Buka aplikasi</a></p><nav><strong>Daftar isi</strong><ol><li><a href="#bagian-1">1. Apa yang berubah?</a></li><li><a href="#bagian-2">2. Paket pembaruan sengaja tidak memuat config.js</a></li><li><a href="#bagian-3">3. Sebelum memperbarui</a></li><li><a href="#bagian-4">4. Unggah pembaruan ke GitHub</a></li><li><a href="#bagian-5">5. Perbarui struktur spreadsheet sekali</a></li><li><a href="#bagian-6">6. Cara menghapus transaksi</a></li><li><a href="#bagian-7">7. Cara reset web ke nol, spreadsheet tetap ada</a></li><li><a href="#bagian-8">8. Konflik, koneksi, dan perangkat lain</a></li><li><a href="#bagian-9">9. Spreadsheet dan izin</a></li><li><a href="#bagian-10">10. Penyelesaian masalah</a></li></ol></nav><h1>Pembaruan Buku Kas Bersama — Hapus &amp; Reset Web</h1>
+<p>Pemilik konfigurasi: <strong><a href="mailto:prasojob10@gmail.com">prasojob10@gmail.com</a></strong>. Versi 2 · 6 Oktober 2026.</p>
+<h2 id="bagian-1">1. Apa yang berubah?</h2>
 <table>
 <thead>
 <tr>
-<th>Bagian</th>
-<th>Fungsinya</th>
-<th>Siapa yang dapat melihat</th>
+<th>Tombol</th>
+<th>Hasil di web</th>
+<th>Hasil di spreadsheet</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>GitHub repository publik</td>
-<td>Menyimpan kode website</td>
-<td>Semua orang</td>
+<td>Hapus pada transaksi</td>
+<td>Transaksi dihapus dari periode aktif</td>
+<td>Transaksi dihapus dari tabel pada tab <strong>Buku Kas</strong> setelah sinkronisasi berhasil</td>
 </tr>
 <tr>
-<td>GitHub Pages</td>
-<td>Menampilkan website melalui HTTPS</td>
-<td>Semua orang dapat membuka halaman login</td>
+<td>Reset web ke Rp0</td>
+<td>Semua transaksi periode lama disembunyikan; saldo, pemasukan, dan pengeluaran kembali nol</td>
+<td>Transaksi lama tetap ada pada tab <strong>Buku Kas</strong> sebagai arsip periode lama</td>
 </tr>
 <tr>
-<td>Google OAuth</td>
-<td>Meminta login dan izin Google Sheets</td>
-<td>Setiap anggota memakai akunnya sendiri</td>
-</tr>
-<tr>
-<td>Google Sheets</td>
-<td>Menyimpan riwayat perubahan transaksi</td>
-<td>Pemilik dan akun yang memperoleh izin dari Google</td>
-</tr>
-<tr>
-<td>Penyimpanan browser</td>
-<td>Cache serta antrean belum terkirim</td>
-<td>Tersimpan pada perangkat/browser yang dipakai</td>
+<td>Hapus salinan lokal akun ini</td>
+<td>Menghapus cache browser dan keluar</td>
+<td>Tidak menghapus transaksi, arsip, atau pengaturan periode</td>
 </tr>
 </tbody></table>
-<p><strong>Publik pada GitHub tidak berarti spreadsheet harus publik.</strong> Pada Google Sheets, biarkan <strong>General access / Akses umum = Restricted / Dibatasi</strong>. Tidak perlu memilih “Anyone with the link”.</p>
-<p>Login dan izin file adalah dua hal berbeda: seseorang dapat berhasil memilih akun Google tetapi tetap ditolak oleh spreadsheet jika belum dibagikan kepadanya. Setiap anggota yang ingin menulis perlu izin <strong>Editor</strong>.</p>
-<p>Tidak ada password aplikasi bersama. Tidak ada kunci sambungan, Apps Script, deployment <code>/exec</code>, iframe, ataupun Client Secret dalam versi ini. <code>ownerEmail</code> hanya menentukan label dan tombol bantuan awal; keamanan file tetap ditegakkan oleh Google Sheets, bukan menyembunyikan alamat email di JavaScript.</p>
-<h2 id="bagian-3">3. Siapkan bahan sebelum mulai</h2>
+<p>Reset berlaku bersama untuk semua anggota buku kas setelah mereka menekan Perbarui. Reset tidak hanya berlaku di HP pemilik. Membuka browser lain, masuk lagi, atau menghapus cache tidak membatalkan periode baru.</p>
+<p>Tab <strong>Buku Kas</strong> sekarang menjadi tabel transaksi yang berlaku, dengan kolom tanggal, jenis, nominal, kategori, catatan, pencatat, serta periode. Pemasukan/pengeluaran dapat dilihat langsung tanpa harus membaca baris peristiwa teknis. Transaksi yang telah dihapus tidak muncul di tabel ini. Satu transaksi yang diedit hanya muncul dengan nilai terakhir yang diterima.</p>
+<h2 id="bagian-2">2. Paket pembaruan sengaja tidak memuat config.js</h2>
+<p>ZIP yang Anda kirim memiliki <code>clientId</code> dan <code>spreadsheetId</code> kosong. Agar sambungan yang sudah bekerja di GitHub tidak terganti nilai kosong, <strong>paket pembaruan ini tidak menyertakan config.js</strong>.</p>
+<p>Jangan menghapus atau mengganti <code>config.js</code> yang sudah terisi di repository GitHub. File tersebut tetap dipakai oleh versi baru. Client ID, Spreadsheet ID, akun pemilik, origin OAuth, dan URL GitHub Pages yang sama tetap digunakan. Tidak perlu membuat project Google atau spreadsheet baru untuk pembaruan ini.</p>
+<p>Paket pembaruan bukan paket instalasi mandiri tanpa konfigurasi: jika dipasang ke repository yang sama sekali baru, Anda perlu menambahkan config.js dari instalasi lama yang sudah diisi.</p>
+<h2 id="bagian-3">3. Sebelum memperbarui</h2>
 <ol>
-<li>Akun Google <strong><a href="mailto:prasojob10@gmail.com">prasojob10@gmail.com</a></strong>, dengan akses masuk yang aktif.</li>
-<li>Akun GitHub. Jika belum ada, daftar melalui <a href="https://github.com/">github.com</a>.</li>
-<li>ZIP paket website ini, kemudian ekstrak. Mengunggah file ZIP saja tidak akan membuat situs berjalan.</li>
-<li>Browser Chrome, Edge, Firefox, atau Safari versi modern. Laptop lebih mudah untuk pengaturan awal; pemakaian hariannya bisa di HP.</li>
-<li>Tempat mencatat tiga nilai: <strong>GitHub username</strong>, <strong>Spreadsheet ID</strong>, dan <strong>Google OAuth Client ID</strong>.</li>
+<li>Minta semua anggota menyimpan formulir yang terbuka.</li>
+<li>Pada versi lama, tekan <strong>Perbarui &amp; kirim antrean</strong> sampai tidak ada transaksi menunggu.</li>
+<li>Unduh CSV bulan yang penting sebagai cadangan tambahan jika diperlukan.</li>
+<li>Pemilik dapat membuka Google Sheets → <strong>File → Make a copy / Buat salinan</strong> untuk cadangan seluruh file.</li>
+<li>Jangan menghapus data browser. Antrean lama tetap dibaca memakai kunci browser versi sebelumnya.</li>
+<li>Setelah Anda memasang pembaruan, minta anggota memuat ulang website; jangan membiarkan halaman versi lama terus digunakan saat struktur spreadsheet dimigrasikan.</li>
 </ol>
-<p>Pastikan akun Google pada pojok kanan atas memang <code>prasojob10@gmail.com</code> saat membuat spreadsheet dan project. Jangan memakai akun pemilik lama dari panduan sebelumnya.</p>
-<h2 id="bagian-4">4. Buat spreadsheet milik akun yang benar</h2>
+<p>Aplikasi baru memeriksa struktur sebelum menulis. Jika struktur tidak dikenali, data tidak ditimpa dan aplikasi menampilkan pesan kesalahan.</p>
+<h2 id="bagian-4">4. Unggah pembaruan ke GitHub</h2>
 <ol>
-<li>Buka <a href="https://sheets.google.com/">Google Sheets</a>.</li>
-<li>Klik foto profil kanan atas. Pilih <strong><a href="mailto:prasojob10@gmail.com">prasojob10@gmail.com</a></strong>.</li>
-<li>Klik <strong>Blank / Kosong</strong> untuk membuat spreadsheet baru.</li>
-<li>Ubah nama menjadi <strong>Buku Kas Bersama</strong>.</li>
-<li>Biarkan tab pertama kosong. Aplikasi akan membuat tab khusus bernama <strong>Buku Kas</strong> pada tahap pengujian.</li>
-<li>Perhatikan URL di bilah alamat. Bentuknya seperti:</li>
-</ol>
-<pre><code class="language-text">https://docs.google.com/spreadsheets/d/ID_SPREADSHEET_ANDA/edit#gid=0
-</code></pre>
-<ol start="7">
-<li>Salin hanya bagian <code>ID_SPREADSHEET_ANDA</code>, yaitu teks setelah <code>/d/</code> dan sebelum <code>/edit</code>. Jangan sertakan <code>/edit</code>, <code>#gid=0</code>, spasi, atau seluruh URL.</li>
-<li>Klik <strong>Share / Bagikan</strong> dan pastikan <strong>General access = Restricted</strong>. Pemilik yang tercantum harus akun yang Anda maksud.</li>
-</ol>
-<p>Mengganti email pada <code>config.js</code> tidak memindahkan kepemilikan spreadsheet. Karena itu membuat file baru dari akun yang benar adalah langkah paling jelas.</p>
-<h2 id="bagian-5">5. Buat repository GitHub dan unggah file</h2>
-<ol>
-<li>Masuk ke <a href="https://github.com/">GitHub</a>.</li>
-<li>Klik tanda <strong>+</strong> di kanan atas → <strong>New repository</strong>.</li>
-<li>Isi <strong>Repository name</strong> dengan <code>buku-kas</code>.</li>
-<li>Pilih <strong>Public</strong> agar dapat menggunakan GitHub Pages pada akun Free.</li>
-<li>Aktifkan <strong>Add a README file</strong>, lalu klik <strong>Create repository</strong>.</li>
-<li>Pada halaman repository, klik <strong>Add file → Upload files</strong>.</li>
-<li>Dari folder ZIP yang sudah diekstrak, unggah file berikut <strong>langsung ke akar repository</strong>, bukan di dalam folder pembungkus:</li>
+<li>Unduh ZIP pembaruan, lalu ekstrak di komputer.</li>
+<li>Buka repository GitHub yang sedang digunakan. Pilih tab <strong>Code</strong>.</li>
+<li>Klik <strong>Add file → Upload files</strong>.</li>
+<li>Unggah file di bawah langsung ke akar repository, pada lokasi yang sama dengan index.html lama:</li>
 </ol>
 <table>
 <thead>
 <tr>
 <th>File</th>
-<th>Kegunaan</th>
+<th>Tindakan</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>index.html</code></td>
-<td>Halaman utama</td>
+<td>index.html</td>
+<td>Ganti versi lama</td>
 </tr>
 <tr>
-<td><code>style.css</code></td>
-<td>Tampilan desktop dan HP</td>
+<td>app.js</td>
+<td>Ganti versi lama</td>
 </tr>
 <tr>
-<td><code>app.js</code></td>
-<td>Login, sambungan Google, dan interaksi aplikasi</td>
+<td>core.js</td>
+<td>Ganti versi lama</td>
 </tr>
 <tr>
-<td><code>core.js</code></td>
-<td>Validasi, penghitungan, dan pengolahan riwayat</td>
+<td>style.css</td>
+<td>Ganti versi lama</td>
 </tr>
 <tr>
-<td><code>config.js</code></td>
-<td>Dua pengaturan yang harus diisi</td>
+<td>sheets.js</td>
+<td>Tambahkan; file baru yang wajib ada</td>
 </tr>
 <tr>
-<td><code>PANDUAN.html</code></td>
-<td>Panduan yang dapat dibuka dari website</td>
+<td>PANDUAN.html</td>
+<td>Ganti agar bantuan di website sesuai versi baru</td>
 </tr>
 <tr>
-<td><code>PANDUAN.md</code></td>
-<td>Panduan versi teks untuk dibaca di GitHub</td>
+<td>PANDUAN.md</td>
+<td>Ganti panduan teks</td>
 </tr>
 <tr>
-<td><code>README.md</code></td>
-<td>Ringkasan project</td>
-</tr>
-<tr>
-<td><code>.nojekyll</code></td>
-<td>Memastikan file statis disajikan langsung; jika tidak terlihat, file ini tidak wajib untuk struktur sederhana ini</td>
+<td>README.md</td>
+<td>Ganti ringkasan</td>
 </tr>
 </tbody></table>
-<ol start="8">
-<li>Isi pesan commit, misalnya <code>Tambahkan website buku kas</code>, lalu klik <strong>Commit changes</strong>.</li>
-<li>Pastikan pada tab <strong>Code</strong> Anda langsung melihat <code>index.html</code>. Jika yang terlihat hanya folder <code>buku-kas-github-baru</code>, pindahkan/upload ulang <strong>isi foldernya</strong> ke akar repository.</li>
-</ol>
-<p>Folder <code>tests</code> dan gambar <code>preview</code> bukan kebutuhan website. Tidak perlu mengunggahnya. Jangan mengunggah CSV berisi data keuangan asli, token akses, password, Client Secret, atau berkas kredensial Google ke repository publik.</p>
-<h2 id="bagian-6">6. Aktifkan GitHub Pages</h2>
-<ol>
-<li>Di repository <strong>buku-kas</strong>, buka <strong>Settings</strong>.</li>
-<li>Pada menu samping, buka <strong>Pages</strong> di bagian <strong>Code and automation</strong>.</li>
-<li>Di <strong>Build and deployment</strong>, atur <strong>Source = Deploy from a branch</strong>.</li>
-<li>Pilih <strong>Branch = main</strong> dan folder <strong>/(root)</strong>.</li>
-<li>Klik <strong>Save</strong>.</li>
-<li>Tunggu proses penerbitan selesai. Buka tab <strong>Actions</strong> jika ingin melihat status prosesnya. Waktu penerbitan bisa beberapa menit.</li>
-<li>Kembali ke <strong>Settings → Pages</strong>, lalu klik <strong>Visit site</strong> ketika alamat situs tersedia.</li>
-<li>Catat alamat yang benar, misalnya <code>https://namaanda.github.io/buku-kas/</code>.</li>
-</ol>
-<p>Pada tahap ini halaman seharusnya tampil tetapi memberi pesan <strong>Belum terhubung</strong>. Ini normal karena pengaturan Google belum diisi. Buka alamat HTTPS dari Pages, bukan file <code>index.html</code> dengan klik ganda dari folder lokal.</p>
-<h2 id="bagian-7">7. Buat project Google Cloud</h2>
-<ol>
-<li>Buka <a href="https://console.cloud.google.com/">Google Cloud Console</a>.</li>
-<li>Pastikan akun kanan atas adalah <strong><a href="mailto:prasojob10@gmail.com">prasojob10@gmail.com</a></strong>.</li>
-<li>Buka pemilih project di bagian atas, di dekat logo Google Cloud.</li>
-<li>Klik <strong>New Project / Project baru</strong>.</li>
-<li>Isi nama project <strong>Buku Kas Bersama</strong>.</li>
-<li>Untuk akun Gmail pribadi, organisasi biasanya <strong>No organization / Tanpa organisasi</strong>.</li>
-<li>Klik <strong>Create</strong>, tunggu selesai, lalu pilih project tersebut dari pemilih project.</li>
-<li>Untuk kebutuhan paket ini, tidak perlu membuat server, mengaktifkan free trial berbayar, atau menambahkan billing untuk layanan lain.</li>
-</ol>
-<p>Project Google Cloud adalah tempat mengatur API dan login. Website tetap dihosting GitHub Pages.</p>
-<h2 id="bagian-8">8. Aktifkan Google Sheets API</h2>
-<ol>
-<li>Pastikan project <strong>Buku Kas Bersama</strong> sedang dipilih.</li>
-<li>Buka menu <strong>APIs &amp; Services → Library</strong>.</li>
-<li>Cari <strong>Google Sheets API</strong>.</li>
-<li>Klik hasil resmi <strong>Google Sheets API</strong>, lalu <strong>Enable / Aktifkan</strong>.</li>
-<li>Jika yang muncul tombol <strong>Manage / Kelola</strong>, API tersebut sudah aktif.</li>
-</ol>
-<p>Anda tidak perlu mengaktifkan Gmail API. Gmail di sini adalah identitas login dan pemilik file, bukan mekanisme pengiriman email. Transaksi masuk ke spreadsheet pada akun tersebut; paket ini tidak mengirim email otomatis.</p>
-<h2 id="bagian-9">9. Buka Google Auth Platform dan atur aplikasi</h2>
-<p><strong>Lokasinya:</strong> buka <a href="https://console.cloud.google.com/auth/overview">Google Auth Platform</a> setelah memilih project yang benar. Bisa juga gunakan kotak pencarian atas Google Cloud dengan kata <strong>Google Auth Platform</strong>. Jika tampilan akun masih lama, menu terkait dapat berada di <strong>APIs &amp; Services → OAuth consent screen</strong>.</p>
-<p>Jika muncul <strong>Get started / Mulai</strong>, klik, lalu isi:</p>
-<table>
-<thead>
-<tr>
-<th>Kolom</th>
-<th>Nilai</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>App name / Nama aplikasi</td>
-<td>Buku Kas Bersama</td>
-</tr>
-<tr>
-<td>User support email</td>
-<td><a href="mailto:prasojob10@gmail.com">prasojob10@gmail.com</a></td>
-</tr>
-<tr>
-<td>Audience / Jenis pengguna</td>
-<td>External</td>
-</tr>
-<tr>
-<td>Contact email / Developer contact</td>
-<td><a href="mailto:prasojob10@gmail.com">prasojob10@gmail.com</a></td>
-</tr>
-</tbody></table>
-<p>Ikuti <strong>Next</strong>, tinjau ketentuan Google, lalu <strong>Create</strong>. Untuk Gmail pribadi pilih <strong>External</strong>; pilihan <strong>Internal</strong> umumnya untuk organisasi Google Workspace dan tidak cocok untuk anggota dari Gmail lain.</p>
-<p>Setelah dibuat, periksa tiga menu ini:</p>
-<p><strong>Branding</strong> — nama aplikasi dan email pendukung harus benar. Untuk pengujian awal tidak perlu menambahkan logo atau domain khusus. Jika Google meminta homepage/kebijakan untuk tahapan publikasi lanjutan, gunakan halaman nyata yang Anda kelola; jangan mendaftarkan <code>github.io</code> sebagai domain milik sendiri.</p>
-<p><strong>Audience</strong> — mulai dengan status <strong>Testing</strong>. Pada <strong>Test users</strong>, klik <strong>Add users</strong> dan tambahkan <strong><a href="mailto:prasojob10@gmail.com">prasojob10@gmail.com</a></strong>, serta Gmail setiap anggota yang akan mencoba aplikasi. Simpan. Akun pemilik project pun sebaiknya dicantumkan secara eksplisit.</p>
-<p><strong>Data Access</strong> — pilih <strong>Add or remove scopes</strong>. Cari Google Sheets API dan pilih:</p>
-<pre><code class="language-text">https://www.googleapis.com/auth/spreadsheets
-</code></pre>
-<p>Tambahkan pula cakupan identitas <strong>openid</strong>, <strong>email</strong> (<code>.../auth/userinfo.email</code>), dan <strong>profile</strong> (<code>.../auth/userinfo.profile</code>) jika belum tercantum. Simpan / Update.</p>
-<p>Izin <code>spreadsheets</code> dikategorikan sensitif dan dapat mencakup spreadsheet lain yang dapat diakses oleh akun pengguna. Kode paket ini memakai ID yang ditetapkan di <code>config.js</code>, tetapi teks izin Google memang lebih luas daripada satu file. Informasi itu juga disampaikan dalam aplikasi. Anggota harus memahami dan menyetujui izin tersebut.</p>
-<p>Status Testing cocok untuk mulai dengan kelompok kecil yang sudah Anda tentukan. Google membatasi sampai 100 test users dan otorisasi uji untuk cakupan ini berakhir setelah tujuh hari sehingga persetujuan ulang dapat diminta. Token akses aplikasi sendiri juga berumur pendek: tombol <strong>Sambungkan kembali</strong> adalah bagian dari alur normal.</p>
-<h2 id="bagian-10">10. Buat OAuth Client ID untuk alamat GitHub</h2>
-<ol>
-<li>Di Google Auth Platform, buka <strong>Clients</strong>.</li>
-<li>Klik <strong>Create client</strong>.</li>
-<li>Pilih <strong>Application type = Web application</strong>.</li>
-<li>Isi nama, misalnya <strong>Buku Kas GitHub Pages</strong>.</li>
-<li>Di <strong>Authorized JavaScript origins</strong>, klik <strong>Add URI</strong>.</li>
-<li>Masukkan hanya asal alamat website:</li>
-</ol>
-<pre><code class="language-text">https://USERNAME.github.io
-</code></pre>
-<p>Contoh: jika website berada di <code>https://namaanda.github.io/buku-kas/</code>, masukkan <strong><a href="https://namaanda.github.io">https://namaanda.github.io</a></strong>. Jangan memasukkan <code>/buku-kas/</code>, garis miring penutup, <code>github.com/USERNAME</code>, atau <code>http://</code>.</p>
-<ol start="7">
-<li><strong>Authorized redirect URIs</strong> boleh dibiarkan kosong untuk alur pop-up Google Identity Services yang digunakan paket ini.</li>
-<li>Klik <strong>Create</strong>.</li>
-<li>Salin <strong>Client ID</strong>, bentuknya berakhir dengan <code>.apps.googleusercontent.com</code>.</li>
-<li>Jangan menyalin <strong>Client Secret</strong> ke website. File ini hanya membutuhkan Client ID yang memang merupakan pengenal publik.</li>
-</ol>
-<p>Client ID lama hanya dapat digunakan jika Anda dapat mengelola project pemiliknya, origin-nya sesuai, dan cakupan API sudah benar. Agar langkah dari awal tidak mencampur akun, panduan ini menyarankan Client ID baru dari project <code>prasojob10@gmail.com</code>.</p>
-<h2 id="bagian-11">11. Isi config.js melalui GitHub</h2>
-<ol>
-<li>Kembali ke repository GitHub → tab <strong>Code</strong>.</li>
-<li>Klik file <strong>config.js</strong>.</li>
-<li>Klik ikon pensil <strong>Edit this file</strong>.</li>
-<li>Isi <code>clientId</code> dan <code>spreadsheetId</code>. Pertahankan tanda kutip serta koma.</li>
-</ol>
-<pre><code class="language-javascript">window.BUKU_KAS_CONFIG = Object.freeze({
-  ownerEmail: &#39;prasojob10@gmail.com&#39;,
-  clientId: &#39;CLIENT_ID_ANDA.apps.googleusercontent.com&#39;,
-  spreadsheetId: &#39;ID_SPREADSHEET_ANDA&#39;
-});
-</code></pre>
-<p>Teks kapital di atas hanyalah contoh; ganti dengan nilai asli. Client ID yang Anda salin biasanya sudah berakhiran <code>.apps.googleusercontent.com</code>, jadi jangan menambahkannya dua kali. <code>spreadsheetId</code> berisi ID saja, bukan alamat lengkap.</p>
+<p>Folder <strong>tests</strong> dan <strong>PENGUJIAN.md</strong> tidak perlu diunggah. Jangan upload ZIP saja dan jangan membungkus seluruh file di folder tambahan. <strong>config.js yang ada di GitHub harus tetap ada dan tidak diubah.</strong></p>
 <ol start="5">
-<li>Klik <strong>Commit changes</strong>. Tulis pesan <code>Atur sambungan Google</code>, lalu commit ke <code>main</code>.</li>
-<li>Tunggu penerbitan Pages selesai kembali.</li>
-<li>Buka website, lalu muat ulang. Di komputer gunakan <strong>Ctrl+Shift+R</strong> bila tampilan masih memakai konfigurasi lama.</li>
+<li>Isi pesan commit, misalnya <strong>Pembaruan hapus spreadsheet dan reset periode</strong>.</li>
+<li>Klik <strong>Commit changes</strong> ke branch main.</li>
+<li>Buka tab <strong>Actions</strong>. Tunggu deployment Pages terbaru selesai dan bertanda hijau.</li>
+<li>Buka URL website yang sama. Di komputer, tekan <strong>Ctrl+Shift+R</strong>. Di HP, muat ulang halaman. Jika tombol baru belum muncul, pastikan deployment terbaru berhasil dan kelima file kode benar-benar diperbarui.</li>
 </ol>
-<p>Yang ada di repository publik hanya email pemilik, Client ID, dan Spreadsheet ID. Mengetahui ID spreadsheet tidak otomatis memberikan akses file yang dibatasi; Google tetap memeriksa izin pengguna.</p>
-<h2 id="bagian-12">12. Login pertama dan siapkan tab data</h2>
+<p>Tidak perlu mengganti Settings → Pages, origin OAuth, atau tautan yang sudah dibagikan.</p>
+<h2 id="bagian-5">5. Perbarui struktur spreadsheet sekali</h2>
 <ol>
-<li>Buka alamat website GitHub Pages melalui Chrome/Safari langsung. Hindari browser kecil di dalam WhatsApp, Instagram, atau aplikasi lain bila login Google gagal.</li>
-<li>Klik <strong>Masuk dengan Google</strong>.</li>
-<li>Pilih <strong><a href="mailto:prasojob10@gmail.com">prasojob10@gmail.com</a></strong>.</li>
-<li>Periksa nama aplikasi <strong>Buku Kas Bersama</strong> dan akun project yang Anda buat sendiri.</li>
-<li>Berikan izin email/profil dan Google Sheets yang diminta.</li>
-<li>Dalam mode Testing, Google dapat menampilkan peringatan aplikasi belum diverifikasi. Ikuti alur pengujian Google hanya untuk aplikasi milik Anda ini dan test user yang sudah terdaftar. Bila akses benar-benar diblokir, periksa Audience, test users, serta kebijakan akun; jangan mengubah pengaturan keamanan akun secara sembarang.</li>
-<li>Sesudah login, jika tab data belum ada, dapat muncul kesalahan rentang atau header. Klik <strong>Siapkan tab Buku Kas (pemakaian pertama)</strong> di bagian atas ruang kerja.</li>
-<li>Konfirmasi. Aplikasi membuat tab <strong>Buku Kas</strong> dan judul kolomnya. Tab lain tidak diubah. Tombol tidak akan menimpa tab yang sudah berisi data.</li>
-<li>Klik <strong>Perbarui &amp; kirim antrean</strong>.</li>
-<li>Halaman yang siap digunakan menampilkan identitas akun dan pesan <strong>Data diperbarui</strong>, tanpa pesan akses ditolak.</li>
+<li>Buka web baru, lalu <strong>Masuk dengan Google</strong> sebagai <strong><a href="mailto:prasojob10@gmail.com">prasojob10@gmail.com</a></strong>, atau email pemilik yang benar pada config.js Anda.</li>
+<li>Pada pemakaian pertama versi 2, Anda akan melihat tombol <strong>Perbarui struktur spreadsheet</strong>.</li>
+<li>Klik tombol tersebut dan baca konfirmasi.</li>
+<li>Klik <strong>OK</strong>. Jangan menutup halaman saat proses berjalan.</li>
+<li>Aplikasi akan mempertahankan data versi lama, menyiapkan tabel transaksi baru, lalu memperbarui tampilan.</li>
+<li>Tunggu pesan bahwa <strong>Web dan tabel Buku Kas diperbarui</strong>.</li>
+<li>Buka spreadsheet untuk memastikan tab <strong>Buku Kas</strong> kini berisi kolom <strong>ID Transaksi, Tanggal, Jenis, Nominal Rupiah, Kategori, Catatan, Pencatat, Waktu Perubahan, Periode</strong>.</li>
 </ol>
-<p>Uji dengan transaksi kecil: pemasukan Rp10.000 dan pengeluaran Rp2.000 pada bulan yang sama. Saldo akhir semestinya Rp8.000 jika belum ada data lain. Cek dua transaksi di web dan peristiwa terkait di tab spreadsheet. Setelah selesai uji, hapus transaksi contoh dari web agar laporan bersih; riwayat penghapusan tetap tersimpan.</p>
-<p>Uji kedua dari HP atau browser lain, masuk dengan akun yang sama, lalu tekan Perbarui. Jika data yang sama muncul, penyimpanan lintas perangkat sudah bekerja.</p>
-<h2 id="bagian-13">13. Tambahkan anggota dengan Gmail lain</h2>
-<p>Untuk setiap anggota, lakukan <strong>dua langkah terpisah</strong> berikut.</p>
-<p><strong>A. Beri akses spreadsheet</strong></p>
+<p>Untuk file versi lama, aplikasi membuat cadangan tab lama secara otomatis, lalu memindahkan riwayat ke tab teknis tersembunyi <strong>_Riwayat Buku Kas</strong>. Tab <strong>Buku Kas</strong> menjadi tabel yang dapat dibaca langsung. Tab lain yang tidak terkait tidak diubah.</p>
+<p>Jika koneksi terputus saat migrasi, masuk lagi dan tekan Perbarui. Migrasi menggunakan permintaan batch; bila sudah diterapkan, pemanggilan ulang akan mengenali struktur baru dan tidak menggandakan cadangan. Jika ditemukan header/format lain yang tidak sesuai, aplikasi berhenti untuk melindungi data. Jangan menghapus tab untuk memaksa proses.</p>
+<h2 id="bagian-6">6. Cara menghapus transaksi</h2>
 <ol>
-<li>Pemilik membuka spreadsheet → <strong>Share / Bagikan</strong>.</li>
-<li>Masukkan alamat Gmail anggota dengan lengkap.</li>
-<li>Pilih <strong>Editor</strong> agar dapat menambah, mengedit, dan menghapus melalui aplikasi.</li>
-<li>Kirim undangan akses sesuai pilihan Google Sheets.</li>
-<li>Biarkan akses umum <strong>Restricted</strong>. Melalui ikon pengaturan berbagi, pemilik dapat menonaktifkan izin Editor untuk mengubah izin/berbagi jika opsi tersebut tersedia.</li>
+<li>Pilih bulan transaksi pada web.</li>
+<li>Temukan transaksi di <strong>Riwayat transaksi</strong>.</li>
+<li>Klik <strong>Hapus</strong> pada transaksi yang benar.</li>
+<li>Periksa kategori dan nominal pada konfirmasi.</li>
+<li>Klik <strong>OK</strong>.</li>
+<li>Tunggu sinkronisasi selesai.</li>
+<li>Buka spreadsheet → tab <strong>Buku Kas</strong>. Baris transaksi tersebut sekarang tidak ada dalam tabel.</li>
 </ol>
-<p><strong>B. Izinkan sebagai pengguna uji aplikasi</strong></p>
+<p>Jika ada masalah internet, perubahan masuk antrean lokal. Penghapusan di Google baru berlaku ketika perubahan berhasil diterima dan tabel berhasil diperbarui. Jangan menambahkan ulang atau menghapus ulang hanya karena koneksi sedang gagal; tekan <strong>Perbarui &amp; kirim antrean</strong> setelah pulih.</p>
+<p>Jika transaksi sudah hilang di web tetapi tabel spreadsheet belum berubah, lihat pesan kesalahan dan tekan Perbarui lagi. Sumber riwayat dapat sudah menerima perubahan sementara pembaruan tabel belum selesai. Pembaruan berikutnya menyusun ulang tabel dari sumber tersebut.</p>
+<p><strong>Hapus bukan pemusnahan permanen semua jejak:</strong> baris di tabel transaksi Buku Kas dihapus, tetapi riwayat teknis dan cadangan terpisah tetap ada untuk pemulihan. Tab tersembunyi tidak memberikan keamanan tambahan terhadap Editor; Editor tetap dapat membuka dan mengubahnya. Jangan menghapus riwayat teknis secara manual karena seluruh web bergantung padanya.</p>
+<h2 id="bagian-7">7. Cara reset web ke nol, spreadsheet tetap ada</h2>
 <ol>
-<li>Pemilik membuka project Google Cloud → <strong>Google Auth Platform → Audience</strong>.</li>
-<li>Pada <strong>Test users</strong>, tambahkan Gmail anggota yang sama.</li>
-<li>Simpan.</li>
-<li>Bagikan URL GitHub Pages kepada anggota melalui saluran Anda sendiri.</li>
-<li>Anggota membuka URL, klik <strong>Masuk dengan Google</strong>, dan memilih Gmail yang sudah didaftarkan.</li>
+<li>Pastikan semua antrean Anda sudah selesai. Tombol reset tidak dapat dipakai jika masih ada perubahan menunggu.</li>
+<li>Masuk sebagai pemilik. Tombol <strong>Reset web ke Rp0</strong> ditampilkan pada akun pemilik sesuai config.js.</li>
+<li>Klik <strong>Reset web ke Rp0</strong>.</li>
+<li>Aplikasi memperbarui data terlebih dahulu; reset memerlukan koneksi Google yang berhasil.</li>
+<li>Baca konfirmasi: reset berlaku untuk seluruh anggota dan data lama tetap tersimpan di spreadsheet.</li>
+<li>Klik <strong>OK</strong>.</li>
+<li>Setelah reset diterima, daftar transaksi web periode aktif kosong. Saldo awal/akhir, pemasukan, dan pengeluaran periode baru menjadi nol.</li>
+<li>Informasi <strong>Periode aktif dimulai ...</strong> akan tampil di bagian atas.</li>
+<li>Buka tab <strong>Buku Kas</strong> di spreadsheet. Transaksi lama tetap ada. Kolom <strong>Periode</strong> membedakan transaksi awal dan transaksi yang dibuat pada setiap periode reset.</li>
+<li>Anggota lain menekan <strong>Perbarui &amp; kirim antrean</strong> untuk memakai periode baru.</li>
 </ol>
-<p>Anggota tidak perlu login ke ChatGPT, mempunyai GitHub, atau membuat project Google Cloud sendiri. Setiap anggota menggunakan izin Google miliknya; website tidak menyamar sebagai pemilik.</p>
-<p>Untuk mencabut akses, hapus orang tersebut dari <strong>Share</strong> di spreadsheet. Dalam mode Testing, hapus pula dari <strong>Test users</strong>. Ini mencabut akses online berikutnya, tetapi tidak dapat menarik kembali file CSV, screenshot, atau cache lokal yang sudah disimpan anggota sebelumnya.</p>
-<p>Versi sederhana ini mempercayakan pengaturan anggota kepada Google Sheets. Semua Editor dapat mengedit transaksi bersama, bukan hanya transaksinya sendiri, dan secara teknis juga dapat mengedit spreadsheet langsung. Ini cocok untuk kelompok yang saling percaya; bukan sistem hak akses kasir/admin yang rumit.</p>
-<h2 id="bagian-14">14. Pemakaian sehari-hari</h2>
-<p><strong>Tambah:</strong> klik <strong>Tambah transaksi</strong>, pilih tanggal dan jenis, masukkan angka rupiah tanpa titik pemisah (contoh <code>25000</code>), kategori, dan catatan opsional. Tekan Simpan. Tanggal awal menggunakan WIB; tanggal dapat diganti untuk transaksi lama.</p>
-<p><strong>Edit/hapus:</strong> gunakan tombol di baris transaksi. Perubahan tercatat sebagai peristiwa baru dalam spreadsheet. Hapus menyembunyikan transaksi dari laporan, bukan menghapus jejak riwayat.</p>
-<p><strong>Saldo awal:</strong> dihitung dari pemasukan dikurangi pengeluaran pada semua tanggal sebelum bulan pilihan. Untuk saldo bawaan sebelum mulai menggunakan aplikasi, buat transaksi kategori “Saldo awal” pada tanggal sebelum bulan pertama laporan. Tidak ada kolom saldo awal manual terpisah.</p>
-<p><strong>Laporan:</strong> pilih bulan. Kartu ringkasan selalu menghitung semua kategori pada bulan tersebut. Pencarian serta filter jenis hanya menyaring tabel dan CSV; tidak mengubah kartu ringkasan. Saldo akhir = saldo awal + pemasukan − pengeluaran.</p>
-<p><strong>CSV:</strong> atur bulan, pencarian, dan jenis sesuai keperluan, lalu <strong>Unduh CSV</strong>. Untuk ekspor penuh satu bulan, kosongkan pencarian dan pilih <strong>Semua jenis</strong>. File ini dapat dibuka dengan Excel atau diimpor ke spreadsheet lain. Paket ini belum menyediakan laporan PDF atau pengiriman laporan melalui email otomatis.</p>
-<p><strong>Pembaruan:</strong> perubahan orang lain muncul setelah Anda menekan <strong>Perbarui &amp; kirim antrean</strong>. Tidak ada pembaruan otomatis waktu nyata. Sebelum mengambil keputusan dari saldo, lakukan Perbarui.</p>
-<p><strong>Sesi habis:</strong> klik <strong>Sambungkan kembali</strong>, pilih akun yang sama. Membuka ulang halaman biasanya membutuhkan otorisasi Google lagi; token tidak disimpan permanen di browser.</p>
-<p><strong>Di layar utama HP:</strong> pada Android/Chrome gunakan menu → Tambahkan ke layar utama jika tersedia. Pada iPhone/Safari gunakan Bagikan → Tambahkan ke Layar Utama. Ini pintasan website; aplikasi tidak memasang service worker dan tidak menjanjikan dapat dimulai dari keadaan sepenuhnya offline.</p>
-<h2 id="bagian-15">15. Jika internet atau Google sedang bermasalah</h2>
-<p>Sesudah Anda sudah login dan halaman terbuka, transaksi baru disimpan dahulu dalam antrean lokal sebelum dikirim. Jika layanan gagal, aplikasi menampilkan <strong>Menunggu pengiriman</strong>. Saldo hanya memasukkan peristiwa yang telah diterima spreadsheet, agar angka tersimpan dan angka belum tersimpan tidak tercampur.</p>
-<ol>
-<li>Jangan menambahkan ulang transaksi yang sama hanya karena antrean belum hilang.</li>
-<li>Pertahankan browser/perangkat yang sama. Jangan menghapus data situs, memakai mode incognito untuk pekerjaan yang perlu dipertahankan, atau mengganti alamat situs sebelum antrean selesai.</li>
-<li>Setelah internet pulih, tekan <strong>Perbarui &amp; kirim antrean</strong>.</li>
-<li>Jika sesi Google habis, tekan <strong>Sambungkan kembali</strong> dengan akun yang sama, kemudian Perbarui.</li>
-<li>Jika server sempat menerima tetapi balasannya terputus, aplikasi memeriksa ID peristiwa sehingga pengiriman ulang dengan ID yang sama tidak dihitung dua kali.</li>
-<li>Jika ada benturan, pilih <strong>Tinjau &amp; terapkan ulang</strong> untuk membaca versi saat ini lalu menyetujui penggantian, atau <strong>Buang dari antrean</strong> untuk membuang perubahan lokal setelah status online dapat diperiksa.</li>
-</ol>
-<p>Antrean <strong>tidak berpindah otomatis ke HP lain</strong>. Cache/antrean disimpan per akun dan per spreadsheet pada origin website yang sama. Data itu tidak dienkripsi oleh aplikasi. Gunakan perangkat pribadi, satu tab aplikasi per akun, dan kirim antrean sebelum berganti perangkat. Kegagalan browser/perangkat atau penghapusan storage dapat menghilangkan antrean yang belum terkirim.</p>
-<p>Jika halaman sudah ditutup lalu Anda benar-benar tidak punya internet, paket ini tidak dapat menjamin halaman/login dapat dibuka kembali. Antrean yang sudah tersimpan tetap menunggu sampai halaman dapat dibuka dan akun yang sama masuk kembali. Ini adalah perlindungan untuk transaksi belum terkirim, bukan aplikasi offline penuh.</p>
-<p>Pada perangkat bersama, setelah seluruh antrean selesai buka bagian <strong>Tentang akses, penyimpanan, dan anggota</strong> → <strong>Hapus salinan lokal akun ini</strong>. Tombol ini juga mengeluarkan Anda. Keluar biasa hanya mengakhiri sesi aplikasi dan menyembunyikan data; cache serta antrean tetap tersimpan.</p>
-<h2 id="bagian-16">16. Mengapa spreadsheet berisi riwayat, bukan hanya satu baris per transaksi?</h2>
-<p>Tab <strong>Buku Kas</strong> adalah catatan peristiwa. Menambah transaksi menghasilkan satu baris, mengedit menghasilkan baris baru, dan menghapus menghasilkan baris baru lagi. Kolomnya adalah ID Peristiwa, ID Transaksi, Versi Sebelumnya, Aksi, Tanggal, Jenis, Nominal Rupiah, Kategori, Catatan, Akun Pencatat, serta Waktu Kirim.</p>
-<p>Aplikasi membaca urutan riwayat untuk menentukan transaksi yang berlaku. Peristiwa ganda dengan ID sama tidak dihitung dua kali. Jika dua edit berangkat dari versi lama yang sama, hanya edit yang cocok dengan versi terakhir saat diproses yang diterima; yang lain menjadi konflik. Pengguna harus meninjau dan menerapkan ulang dengan sengaja.</p>
-<p><strong>Jangan langsung menjumlahkan kolom Nominal Rupiah pada tab riwayat</strong>, karena edit dan penghapusan akan membuat hasil penjumlahan mentah berbeda dari saldo. Laporan yang berlaku adalah tampilan web dan CSV hasil ekspor. Jangan menyortir fisik, mengganti header, menghapus, atau mengedit baris riwayat secara manual; hal itu dapat mengubah cara riwayat ditafsirkan.</p>
-<p>Simpan cadangan berkala melalui <strong>File → Make a copy</strong> di Google Sheets dan unduh CSV laporan. Riwayat ini membantu pemulihan tetapi bukan audit yang kebal perubahan: siapa pun dengan izin Editor tetap dapat mengubah file Google Sheets.</p>
-<h2 id="bagian-17">17. Penyelesaian masalah</h2>
+<p>Contoh: sebelum reset ada pemasukan Rp100.000 dan pengeluaran Rp20.000. Saldo web Rp80.000. Setelah reset, saldo web Rp0 dan tabel web kosong, tetapi dua transaksi lama tetap ada di spreadsheet. Jika Anda menambah pemasukan Rp30.000 setelah reset, saldo web menjadi Rp30.000. Spreadsheet menyimpan dua transaksi lama dan transaksi baru.</p>
+<p>Reset tidak menghapus semua baris pada sheet dan tidak mengubah transaksi lama menjadi Rp0. Reset menyimpan penanda periode baru di sumber bersama. Ini juga berarti bulan laporan yang sama dapat memiliki dua periode; kartu web hanya menghitung periode aktif. Pengisian tanggal mundur pada transaksi baru tetap masuk periode aktif.</p>
+<p>Transaksi periode lama tidak ditampilkan untuk edit/hapus melalui web periode baru. Arsip hanya dapat dibaca pada spreadsheet. Pada versi ini belum ada tombol kembali ke periode lama atau membatalkan reset. Reset lagi akan memulai periode berikutnya; tidak menghapus arsip sebelumnya.</p>
+<h2 id="bagian-8">8. Konflik, koneksi, dan perangkat lain</h2>
+<ul>
+<li>Semua anggota harus memakai kode versi baru. Jangan menjalankan tab versi 1 yang masih terbuka setelah migrasi.</li>
+<li>Perubahan antarperangkat terlihat setelah Perbarui; bukan pembaruan otomatis waktu nyata.</li>
+<li>Jika anggota masih menulis formulir lama ketika pemilik reset, transaksi itu tidak langsung dimasukkan ke periode baru tanpa peninjauan. Aplikasi menampilkan konflik periode.</li>
+<li><strong>Tinjau &amp; terapkan ulang</strong> dapat menyimpan isinya sebagai transaksi baru di periode aktif setelah pengguna menyetujui. Arsip lama tidak diganti. Antrean penghapusan dari periode lama tidak diterapkan ke arsip lewat periode baru; buang antrean tersebut.</li>
+<li>Reset bersamaan dari dua perangkat juga diperiksa. Perubahan yang berbenturan membutuhkan peninjauan; tidak melakukan reset tambahan diam-diam.</li>
+<li>Jika respons Google terputus setelah menerima perubahan, ID peristiwa digunakan untuk memastikan perubahan yang sama tidak dihitung dua kali.</li>
+<li>Antrean lokal hanya berada pada akun/browser/perangkat asalnya. Gunakan satu tab aplikasi per akun dan jangan hapus data browser sebelum antrean selesai.</li>
+<li>Reset yang responsnya terputus dapat tetap muncul di antrean. Jangan reset lagi; tekan Perbarui untuk memeriksa apakah reset sudah diterima.</li>
+<li>Riwayat adalah sumber data utama; tabel Buku Kas adalah tampilan yang disusun ulang. Saat banyak anggota menulis bersamaan, aplikasi memeriksa kembali sumber setelah memperbarui tabel. Jika perubahan terus berlangsung atau sambungan terputus, Perbarui lagi diperlukan. Data tidak hilang hanya karena tabel tertinggal.</li>
+</ul>
+<h2 id="bagian-9">9. Spreadsheet dan izin</h2>
+<p>Spreadsheet tetap menggunakan akses <strong>Restricted / Dibatasi</strong>. Anggota yang menulis tetap perlu akses <strong>Editor</strong>, dan test users OAuth selama status Testing. Tidak ada perubahan scope Google pada versi baru ini.</p>
+<p>Jangan mengedit, menyortir fisik, mengganti header, atau menghapus baris pada <strong>_Riwayat Buku Kas</strong>. Jangan menambahkan baris manual ke <strong>Buku Kas</strong>, karena aplikasi menyusun ulang tabel ini pada sinkronisasi. Untuk analisis tambahan, buat tab lain yang merujuk data Buku Kas atau unduh CSV. CSV dari web hanya memuat periode aktif dan filter bulan/pencarian/jenis yang Anda pilih.</p>
+<p>Cadangan versi lama dan riwayat teknis disembunyikan agar tidak tertukar dengan laporan. Pemilik dapat melihatnya melalui <strong>View / Tampilan → Hidden sheets / Sheet tersembunyi</strong>. Menjumlahkan nominal pada riwayat teknis tetap tidak menghasilkan laporan yang benar, karena ada revisi dan penghapusan. Tabel Buku Kas sudah memuat satu nilai terakhir untuk setiap transaksi yang belum dihapus; pilih periode yang sesuai jika ingin menjumlahkan satu periode.</p>
+<p>Tombol reset hanya ditampilkan untuk email pemilik pada UI. Ini bukan sistem peran backend yang ketat: semua Editor merupakan anggota tepercaya dan secara teknis dapat mengubah file Google atau kode client. Google tetap menentukan akses file. Pengaturan ini cocok untuk kelompok kecil tepercaya.</p>
+<h2 id="bagian-10">10. Penyelesaian masalah</h2>
 <table>
 <thead>
 <tr>
 <th>Gejala</th>
-<th>Periksa / lakukan</th>
+<th>Tindakan</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Halaman GitHub 404</td>
-<td>Pages harus aktif dari <code>main</code> + <code>/(root)</code>, <code>index.html</code> ada di akar, deployment Actions selesai, URL repository benar.</td>
+<td>“Isi config.js” setelah upload</td>
+<td>config.js lama terhapus/terganti. Pulihkan Client ID dan Spreadsheet ID yang sudah benar. Paket update tidak memuat file itu.</td>
 </tr>
 <tr>
-<td>Halaman tampil tetapi “Belum terhubung”</td>
-<td>Isi kedua nilai config.js, commit, tunggu Pages, muat ulang. Jangan buka dari <code>file://</code>.</td>
+<td>Tombol baru tidak terlihat</td>
+<td>Tunggu deployment Actions selesai lalu muat ulang tanpa cache; pastikan index.html dan app.js versi baru di akar repository.</td>
 </tr>
 <tr>
-<td><code>origin_mismatch</code></td>
-<td>Authorized JavaScript origins harus sama dengan origin yang ditampilkan aplikasi: HTTPS + username.github.io saja, tanpa path repository. Pastikan Client ID yang diedit sama dengan config.js.</td>
+<td><code>KasSheets</code> tidak tersedia / halaman tidak berjalan</td>
+<td>sheets.js belum diunggah, atau file lama/campuran masih dimuat. Unggah semua file kode pembaruan dan muat ulang.</td>
 </tr>
 <tr>
-<td><code>invalid_client</code> / <code>deleted_client</code></td>
-<td>Salin ulang Client ID dari Clients pada project yang benar; tipe harus Web application.</td>
+<td>Diminta memperbarui struktur</td>
+<td>Login sebagai pemilik dan klik Perbarui struktur spreadsheet sekali.</td>
 </tr>
 <tr>
-<td><code>redirect_uri_mismatch</code></td>
-<td>Pastikan memakai paket baru ini dan alur pop-up GIS. Jangan mencampur kode Apps Script/redirect dari versi sebelumnya.</td>
+<td>Tombol migrasi/reset tidak muncul</td>
+<td>Periksa Gmail yang sedang login dan ownerEmail pada config.js.</td>
 </tr>
 <tr>
-<td><code>access_denied</code>, aplikasi masih diuji</td>
-<td>Masukkan Gmail yang sedang login ke Audience → Test users.</td>
+<td>Format/header tidak dikenali</td>
+<td>Aplikasi tidak menimpa data. Kirim screenshot header serta pesan kesalahan untuk diperiksa.</td>
 </tr>
 <tr>
-<td><code>org_internal</code></td>
-<td>Audience harus External untuk Gmail pribadi dan pengguna luar organisasi.</td>
+<td>Akses ditolak</td>
+<td>Pastikan akun Editor, Sheets API aktif, izin OAuth disetujui, dan test user terdaftar.</td>
 </tr>
 <tr>
-<td>Google meminta izin lagi</td>
-<td>Normal saat sesi/otorisasi habis. Gunakan Sambungkan kembali.</td>
+<td>Web sudah berubah, spreadsheet belum</td>
+<td>Tekan Perbarui lagi setelah koneksi pulih. Tabel perlu disinkronkan dari riwayat.</td>
 </tr>
 <tr>
-<td>Pop-up tidak muncul</td>
-<td>Izinkan pop-up; buka di browser utama, bukan browser dalam aplikasi pesan; periksa pemblokir skrip.</td>
+<td>Saldo lama muncul setelah reset</td>
+<td>Muat ulang versi terbaru dan tekan Perbarui; pastikan spreadsheet yang dibuka adalah file yang sama.</td>
 </tr>
 <tr>
-<td>403 / akses ditolak</td>
-<td>Aktifkan Sheets API pada project Client ID; setujui izin Sheets; pastikan akun adalah Editor file.</td>
+<td>Reset tidak bisa diklik</td>
+<td>Selesaikan seluruh antrean dahulu, lalu periksa sambungan Google.</td>
 </tr>
 <tr>
-<td>404 spreadsheet</td>
-<td>ID salah atau file tidak dapat diakses oleh akun itu. Coba buka URL spreadsheet langsung dengan akun yang sama.</td>
+<td>Spreadsheet berisi data lama setelah reset</td>
+<td>Itu memang perilaku yang diminta: data lama tetap arsip. Web hanya menunjukkan periode baru.</td>
 </tr>
 <tr>
-<td>Unable to parse range / tab tidak ditemukan</td>
-<td>Pemilik klik Siapkan tab Buku Kas pada website.</td>
-</tr>
-<tr>
-<td>Header tidak sesuai</td>
-<td>Jangan menimpa data. Periksa apakah tab Buku Kas berasal dari versi lama dengan struktur berbeda. Gunakan spreadsheet baru untuk paket baru ini.</td>
-</tr>
-<tr>
-<td>429 / terlalu banyak permintaan</td>
-<td>Hentikan klik berulang, tunggu sekitar satu menit lalu coba lagi. Antrean tetap lokal.</td>
-</tr>
-<tr>
-<td>Angka tidak berubah sesudah simpan</td>
-<td>Periksa antrean dan pesan kesalahan; cek bulan transaksi dan filter; tekan Perbarui.</td>
-</tr>
-<tr>
-<td>Anggota tidak melihat transaksi terbaru</td>
-<td>Tekan Perbarui pada perangkat anggota; pastikan config menunjuk spreadsheet yang sama.</td>
-</tr>
-<tr>
-<td>Antrean tampak hilang</td>
-<td>Periksa akun, browser, perangkat, origin GitHub, dan ID spreadsheet; semuanya menentukan tempat penyimpanan lokal.</td>
-</tr>
-<tr>
-<td>Tampilan lama setelah upload</td>
-<td>Tunggu deployment berhasil, lalu muat ulang tanpa cache.</td>
-</tr>
-<tr>
-<td>Tidak dapat menyimpan antrean lokal</td>
-<td>Ruang penyimpanan browser habis/diblokir. Salin isi formulir, periksa storage; jangan menganggap transaksi sudah tersimpan.</td>
+<td>Sesi Google habis</td>
+<td>Klik Sambungkan kembali dengan akun yang sama.</td>
 </tr>
 </tbody></table>
-<p>Jika meminta bantuan, kirim teks pesan kesalahan, langkah yang sedang dilakukan, dan URL GitHub Pages. Boleh membagikan Client ID serta Spreadsheet ID untuk mengisi konfigurasi, tetapi jangan membagikan password, Client Secret, cookie, ataupun access token.</p>
-<h2 id="bagian-18">18. Daftar pemeriksaan akhir</h2>
-<ul>
-<li><input disabled="" type="checkbox"> Pemilik spreadsheet adalah <strong><a href="mailto:prasojob10@gmail.com">prasojob10@gmail.com</a></strong>.</li>
-<li><input disabled="" type="checkbox"> GitHub repository Public dan Pages berhasil diterbitkan.</li>
-<li><input disabled="" type="checkbox"> <code>index.html</code> ada pada akar repository.</li>
-<li><input disabled="" type="checkbox"> Sheets API aktif pada project yang benar.</li>
-<li><input disabled="" type="checkbox"> OAuth Audience External; akun pemilik dan anggota ada pada Test users.</li>
-<li><input disabled="" type="checkbox"> Client bertipe Web application; origin HTTPS GitHub benar.</li>
-<li><input disabled="" type="checkbox"> <code>config.js</code> berisi Client ID dan Spreadsheet ID asli.</li>
-<li><input disabled="" type="checkbox"> Login pemilik berhasil dan tab Buku Kas berhasil disiapkan.</li>
-<li><input disabled="" type="checkbox"> Pemasukan/pengeluaran contoh menghasilkan saldo yang benar.</li>
-<li><input disabled="" type="checkbox"> Akun anggota dapat login, membaca, dan menulis setelah dibagikan sebagai Editor.</li>
-<li><input disabled="" type="checkbox"> Akun yang tidak diberi akses spreadsheet ditolak saat membaca/menulis.</li>
-<li><input disabled="" type="checkbox"> Data dapat dilihat dari perangkat kedua setelah Perbarui.</li>
-<li><input disabled="" type="checkbox"> Antrean ketika koneksi gagal dapat terkirim setelah pulih.</li>
-<li><input disabled="" type="checkbox"> Semua transaksi uji sudah dihapus melalui aplikasi.</li>
-</ul>
-<h2 id="bagian-19">19. Batas versi ini dan pengembangan berikutnya</h2>
-<p>Paket ini ditujukan untuk buku kas pribadi atau kelompok kecil tepercaya. Belum mencakup unggahan nota, login permanen, pembatasan anggota hanya boleh mengedit transaksi sendiri, impor data lama otomatis, email terjadwal, PDF, ataupun halaman offline penuh. Pembacaan riwayat dilakukan utuh sehingga file yang sangat besar akan lebih lambat. Kuota Google dapat membatasi frekuensi pemakaian.</p>
-<p>Website publik dapat diakses kapan saja selama layanan dan koneksi tersedia; komputer Anda tidak perlu menyala. Namun mode Testing Google adalah tahap awal: sebelum memperluas ke penggunaan umum, tinjau persyaratan produksi/verifikasi OAuth Google. Mengubah ke Production tidak otomatis membuat aplikasi terverifikasi dan tidak menghilangkan semua batas aplikasi belum diverifikasi. Jangan menjanjikan akses tanpa batas untuk siapa saja dengan konfigurasi pengujian.</p>
-<h2 id="bagian-20">20. Rujukan resmi</h2>
-<p>Panduan ditulis ulang untuk paket ini, dengan rujukan pengaturan resmi berikut. Nama menu bisa berubah mengikuti antarmuka layanan.</p>
-<ul>
-<li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages">GitHub — What is GitHub Pages?</a></li>
-<li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">GitHub — Configuring a publishing source</a></li>
-<li><a href="https://developers.google.com/identity/oauth2/web/guides/get-google-api-clientid">Google — Get your API client ID</a></li>
-<li><a href="https://developers.google.com/identity/oauth2/web/guides/use-token-model">Google — Use the token model</a></li>
-<li><a href="https://support.google.com/cloud/answer/15549945?hl=en">Google — Manage App Audience</a></li>
-<li><a href="https://developers.google.com/workspace/sheets/api/scopes">Google — Sheets API scopes</a></li>
-<li><a href="https://developers.google.com/workspace/sheets/api/limits">Google — Sheets API usage limits and pricing</a></li>
-<li><a href="https://support.google.com/cloud/answer/7454865?hl=en">Google — Unverified apps</a></li>
-</ul>
-<footer>Panduan pemasangan · 3 Oktober 2026 · Pemilik: prasojob10@gmail.com</footer></main></body></html>
+<p>Kode ini telah diuji melalui simulasi API dan antarmuka, bukan kredensial Google nyata. Deployment repository Anda serta operasi Google nyata perlu diperiksa sesudah Anda mengunggah dan menekan migrasi. Aplikasi tidak pernah menghubungi spreadsheet pribadi Anda dari proses pembuatan paket ini.</p>
+</main></body></html>

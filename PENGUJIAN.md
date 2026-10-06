@@ -1,9 +1,11 @@
-# Catatan pengujian — 3 Oktober 2026
+# Pengujian versi 2 — 6 Oktober 2026
 
-Lulus pemeriksaan sintaks JavaScript dan pengujian fungsi inti dengan Node.js.
+Lulus pemeriksaan sintaks app.js, core.js, dan sheets.js.
 
-Lulus simulasi browser Chromium desktop 1440px dan HP 390px: login dengan respons Google tiruan, inisialisasi tab/header, tambah/edit/hapus, perlindungan tampilan terhadap HTML pada catatan, antrean saat koneksi gagal, pemulihan respons append yang hilang tanpa duplikasi, konflik edit bersamaan dengan persetujuan penerapan ulang, dan keluar. Tidak ada kesalahan JavaScript halaman pada pengujian ini. Tampilan desktop/HP juga ditinjau melalui screenshot.
+Lulus Node core.test: saldo bulanan, validasi rupiah/tanggal, revisi, penghapusan, duplikasi, konflik, CSV.
 
-Belum diuji: OAuth dengan akun Google nyata, izin dan kebijakan project milik pengguna, deployment GitHub Pages nyata, Safari/iOS fisik, pemakaian volume tinggi. Keduanya memerlukan konfigurasi yang diisi pengguna. Jangan menganggap simulasi sebagai bukti otorisasi Google nyata sudah berjalan.
+Lulus v2.test dengan Google Sheets API tiruan: migrasi versi 1 tanpa kehilangan log, cadangan asli, migrasi idempotent, sel transaksi dihapus dari tabel Buku Kas, seluruh arsip tabel tetap sama setelah reset, pemasukan periode baru dimulai dari nol, konflik reset/antrean periode lama, perubahan bersamaan saat publikasi tabel, pemulihan append yang balasannya hilang, deduplication, koneksi gagal, header tidak dikenal ditolak, inisialisasi file kosong.
 
-Tidak ada kredensial atau data keuangan asli dalam paket. Nilai dalam tests merupakan data tiruan dan tidak dimuat website produksi.
+Lulus app.test dengan DOM/API/storage tiruan yang menjalankan kode aplikasi asli: pembatasan migrasi, tombol hapus memperbarui tabel, reset dan saldo nol, reset bersama yang bertahan setelah ganti akun serta hapus cache, anggota tidak melihat tombol reset, transaksi baru, larangan reset dengan antrean, antrean reset dapat ditinjau, formulir lama sesudah reset tidak menimpa arsip, kegagalan storage tidak mengaku menyimpan.
+
+Belum diuji pada sesi Google nyata, spreadsheet/repository pengguna, atau browser fisik setelah revisi ini. Lingkungan uji kali ini tidak memiliki binary browser; uji DOM bukan screenshot/layout. Tidak ada data keuangan asli atau rahasia dalam paket.
